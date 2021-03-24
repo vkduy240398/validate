@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <div class="form">
+            <h3>Form TEST</h3>
+            <form action="#" id="form_sign" method="post">
+                <div class="form-group">
+                   <div>
+                       <div>
+                        <input type="text" id="user" name="user" placeholder="Nhập username">
+                       </div>
+                   </div>
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="email" name="email" placeholder="Nhập email">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Nhập password">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password_comfirm" name="password_comfirm" placeholder="Nhập password">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="file" name="file" placeholder="Nhập password">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="radio" name="gender" value="Male">
+                    <input type="radio"  name="gender" value="Female" >
+                    <input type="radio"  name="gender" value="Other">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="inter" value="game">
+                    <input type="checkbox"  name="inter" value="football" >
+                    <input type="checkbox"  name="inter" value="Swimming">
+                    <span id="message"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Sign">
+                </div>
+            </form>
+        </div>
+</body>
+<script src="validator.js"></script>
+<script>
+    validator({
+        form:"#form_sign",
+        error:"#message",
+        formGroup:".form-group",
+        rules:[
+        validator.isRequired("#user"),
+        validator.isRequired('input[name="gender"]'),
+        validator.isRequired('input[name="inter"]'),
+        validator.isRequired("#email"),
+        validator.isRequired("#file"),
+        validator.isRequired("#password"),
+        validator.isRequired("#password_comfirm"),
+        validator.isEmail("#email"),
+        validator.isMin("#password",3),
+        validator.isConfirm("#password_comfirm",function(){
+            return document.querySelector("#form_sign #password").value;
+        },'Mật khẩu xác nhận không chính xác'),
+        ],
+        onsubmit:function(data){
+            console.log(data);
+        }
+    });
+</script>
+</html>
